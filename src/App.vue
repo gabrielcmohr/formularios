@@ -3,6 +3,30 @@ import { reactive, ref } from 'vue'
 
 const titulo = ref('Digite algo...')
 const mostrarResultado = ref(false)
+
+const categorias = [
+
+  {
+    id:1, nome: "HG"
+  },
+  {
+    id:1, nome: "Minecraft"
+  },
+  {
+    id:1, nome: "Joias"
+  },
+  {
+    id:1, nome: "Vestuario"
+  },
+  {
+    id:1, nome: "Biblioteca"
+  },
+  {
+    id:1, nome: "CS2"
+  }
+
+]
+
 const produto = reactive({
   nome: '',
   preco: 0,
@@ -35,10 +59,17 @@ function formatarPreco(preco) {
       <label for="">Estoque:</label>
       <input type="number" v-model="produto.estoque">
     </div>
-      <div class="row">
+<!--     <div class="row">
       <label for="">Categoria:</label>
       <input type="text" v-model="produto.categorias">
-    </div>
+    </div>  --> 
+    <fieldset>
+  <legend>Categorias:</legend>
+  <div v-for="categoria in categorias" :key="categoria.nome">
+    <input type="checkbox" v-model="produto.categorias" :value="categoria.nome" /> {{ categoria.nome }}
+  </div>
+</fieldset>
+
     <button @click="mostrarResultado = !mostrarResultado">Mostrar resultado</button>
     </div>
     <Transition>
@@ -74,10 +105,7 @@ function formatarPreco(preco) {
 }
 .resultado {
   background-color: bisque;
-
 }
-
-
 
 </style>
 
